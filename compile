@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+##############################
+### XML Parser             ###
+###   Compiler Instruction ###
+##############################
+
+LANGUAGE=$1
+
+compile() {
+
+    echo "\nSetting flags and compiling parser..."
+    echo Language Selection: $LANGUAGE
+    echo " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
+###=================================###
+###     COMPILE FOR C LANG PROGRAM  ###
+###         Uses GCC                ###
+###=================================###
+    if [ "$LANGUAGE" == "c" ]; then
+        
+        echo "   Compiling for C..."
+        gcc xml_parser_c.c \
+        -L/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/lib -lxml2 -lz -lpthread -licucore -lm \
+        -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include/libxml2 \
+        -o xml_parser
+        echo "   Done!\r\n"
+
+###==================================###
+###     COMPILER FOR D LANG PROGRAM  ###
+###         Uses DMD                 ###
+###==================================###
+    else
+        if [ "$LANGUAGE" == "d" ]; then
+
+            echo "   Compiling for D..."
+            dmd xml_parser_d -ofxml_parser
+            echo "   Done!\r\n"
+
+        fi
+    fi
+    
+
+    return 0
+}
+
+compile
