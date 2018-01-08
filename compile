@@ -51,7 +51,7 @@ compile() {
         if [ "$LANGUAGE" == "d" ]; then
             heading
             echo "   Compiling for D..."
-            dmd xml_parser_d -ofxml_parser
+            dmd xml_parser_d -O -m64 -ofxml_parser
             echo "   Done!"
             echo " "
         else
